@@ -1,5 +1,5 @@
 #ifndef WEAPON_HPP
-#define WEAPON_HPP
+# define WEAPON_HPP
 
 #include <iostream>
 
@@ -8,10 +8,11 @@ class Weapon {
 		std::string	_type;
 
 	public:
-		Weapon(std::string const type);
+		Weapon(void);
+		Weapon(std::string name);
 		~Weapon(void);
 		std::string const &	getType(void) const;
-		void				setType(std::string const & type);
+		void				setType(std::string type);
 };
 
 #endif

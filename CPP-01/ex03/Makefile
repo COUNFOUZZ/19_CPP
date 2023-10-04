@@ -1,7 +1,7 @@
-NAME = human
+NAME = violence
 OBJS_DIR = objs
 
-FILES = main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
+FILES = main.cpp HumanA.cpp HumanB.cpp Weapon.cpp
 SRCS = $(FILES)
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:.cpp=.o))
 
