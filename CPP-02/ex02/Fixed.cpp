@@ -75,10 +75,35 @@ Fixed&	Fixed::operator--(void) {
 	return (*this);
 }
 
+Fixed Fixed::operator+(Fixed const & dest) {
+	Fixed	res;
+
+	res.setRawBits(this->_value + dest._value);
+	return (res);
+}
+
+Fixed Fixed::operator-(Fixed const & dest) {
+	Fixed	res;
+
+	res.setRawBits(this->_value - dest._value);
+	return (res);
+}
+
 Fixed Fixed::operator*(Fixed const & dest) {
 	Fixed	res;
 
 	res.setRawBits((this->_value * dest._value) >> this->_fractionaryBits);
+	return (res);
+}
+
+Fixed Fixed::operator/(Fixed const & dest) {
+	Fixed	res;
+
+	if (dest == 0) {
+		std::cout << "Can't be divide by 0 !" << std::endl;
+		return (0);
+	}
+	res.setRawBits((this->_value << this->_fractionaryBits) / dest._value);
 	return (res);
 }
 
