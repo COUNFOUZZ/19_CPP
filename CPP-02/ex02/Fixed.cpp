@@ -127,6 +127,22 @@ int	Fixed::toInt(void) const {
 	return (this->_value >> this->_fractionaryBits);
 }
 
+Fixed&	Fixed::min(Fixed& a, Fixed& b) {
+	return (a < b ? a : b);
+}
+
+Fixed const &	Fixed::min(Fixed const & a, Fixed const & b) {
+	return (a < b ? a : b);
+}
+
+Fixed&	Fixed::max(Fixed& a, Fixed& b) {
+	return (a > b ? a : b);
+}
+
+Fixed const &	Fixed::max(Fixed const & a, Fixed const & b) {
+	return (a > b ? a : b);
+}
+
 std::ostream&	operator<<(std::ostream& output, Fixed const& fixed) {
 	output << fixed.toFloat();
 	return (output);
