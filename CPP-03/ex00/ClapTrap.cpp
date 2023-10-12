@@ -1,6 +1,7 @@
 #include "./ClapTrap.hpp"
 
 ClapTrap::ClapTrap(void) : _name("Default"), _hitPoints(10), _energyPoints(10), _attackDamage(0) {}
+ClapTrap::ClapTrap(ClapTrap const & b) : _name(b._name), _hitPoints(b._hitPoints), _energyPoints(b._energyPoints), _attackDamage(b._attackDamage) {}
 ClapTrap::ClapTrap(std::string name) : _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0) {}
 ClapTrap::~ClapTrap(void) {}
 
