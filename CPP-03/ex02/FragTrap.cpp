@@ -5,7 +5,7 @@ FragTrap::FragTrap(void) {
     this->_name = "Default_FragTrap";
     this->_hitPoints = 100;
     this->_energyPoints = 100;
-    this->_attackDamage = 20;
+    this->_attackDamage = 30;
 }
 
 FragTrap::FragTrap(FragTrap const & other) : ClapTrap() {
