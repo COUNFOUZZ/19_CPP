@@ -73,7 +73,7 @@ void	Contact::showFull(void) const {
 	std::cout << "Nickname : " << this->_nickname << std::endl;
 	std::cout << "Phone number : " << this->_phoneNumber << std::endl;
 	std::cout << "Darkest secret : " << this->_darkSecret << std::endl;
-	std::cout << std::endl << "Press any key to continue..." << std::endl;
+	std::cout << std::endl << "Press [ENTER] to continue..." << std::endl;
 	if (!std::getline(std::cin, input))
 		exit(EXIT_SUCCESS);
 	system("clear");
