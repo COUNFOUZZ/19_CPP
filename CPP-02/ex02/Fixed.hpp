@@ -22,9 +22,9 @@ class Fixed {
 		bool	operator<=(Fixed const & dest) const;
 		bool	operator==(Fixed const & dest) const;
 		bool	operator!=(Fixed const & dest) const;
-		Fixed&	operator++(int);
+		Fixed	operator++(int);
 		Fixed&	operator++(void);
-		Fixed&	operator--(int);
+		Fixed	operator--(int);
 		Fixed&	operator--(void);
 		Fixed	operator+(Fixed const & dest);
 		Fixed	operator-(Fixed const & dest);

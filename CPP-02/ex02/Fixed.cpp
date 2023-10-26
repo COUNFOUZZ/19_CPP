@@ -55,9 +55,10 @@ bool	Fixed::operator!=(Fixed const & dest) const {
 	return (this->_value != dest._value);
 }
 
-Fixed&	Fixed::operator++(int) {
+Fixed	Fixed::operator++(int) {
+	Fixed	tmp(*this);
 	this->_value++;
-	return (*this);
+	return (tmp);
 }
 
 Fixed&	Fixed::operator++(void) {
@@ -65,9 +66,10 @@ Fixed&	Fixed::operator++(void) {
 	return (*this);
 }
 
-Fixed&	Fixed::operator--(int) {
+Fixed	Fixed::operator--(int) {
+	Fixed	tmp(*this);
 	this->_value--;
-	return (*this);
+	return (tmp);
 }
 
 Fixed&	Fixed::operator--(void) {
