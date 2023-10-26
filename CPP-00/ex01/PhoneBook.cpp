@@ -41,10 +41,9 @@ void	PhoneBook::searchContact(void) const {
 		if (input.empty())
 			continue;
 		index = std::atoi(input.c_str());
-		if (!_contact[index].exist()) {
+		if (index >= 0 && index < 8 && !_contact[index].exist()) {
 			_contact[index].showFull();
 		} else {
-			input.clear();
 			std::cout << "There is no entry in this index !" << std::endl;
 		}
 	}
