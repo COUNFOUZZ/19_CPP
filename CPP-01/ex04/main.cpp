@@ -2,7 +2,9 @@
 #include <fstream>
 
 std::string	replace(std::string src, std::string s1, std::string s2) {
-	for (size_t i = 0; i < src.length(); ++i) {
+	size_t len = src.length();
+
+	for (size_t i = 0; i < len; ++i) {
 		if (src.compare(i, s1.length(), s1) == 0) {
 			src.erase(i, s1.length());
 			src.insert(i, s2);
@@ -25,7 +27,7 @@ int	main(int argc, char **argv) {
 	std::ofstream	outfile((filename + ".replace").c_str());
 	std::string		line;
 
-	for (size_t i = 0; getline(infile, line); ++i) {
+	for (;getline(infile, line);) {
 		outfile << replace(line, toReplace, replaceBy);
 		outfile << std::endl;
 	}
