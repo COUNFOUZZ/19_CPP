@@ -41,7 +41,7 @@ void	Harl::complain(std::string level) const {
 	}
 	switch (choice) {
 		case 0:
-			std::cout << "[ DEBUG] " << std::endl;
+			std::cout << "[ DEBUG ] " << std::endl;
 			(this->*_ftPtr[choice])();
 		case 1:
 			std::cout << "[ INFO ]" << std::endl;
