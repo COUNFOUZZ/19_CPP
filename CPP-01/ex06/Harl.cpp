@@ -54,6 +54,6 @@ void	Harl::complain(std::string level) const {
 			(this->*_ftPtr[choice])();
 			break;
 		default:
-			std::cout << "Bad level !" << std::endl;
+			std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
 	}
 }
