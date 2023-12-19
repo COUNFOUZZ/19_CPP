@@ -10,7 +10,6 @@ all: $(OBJS_DIR) $(NAME)
 
 $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)
-	@mkdir -p $(OBJS_DIR)
 
 $(NAME): $(OBJS)
 	c++ $(CFLAGS) $(CPPFLAGS) -o $(NAME) $(OBJS)
