@@ -1,16 +1,14 @@
 #include <iostream>
 #include <fstream>
 
-std::string	replace(std::string src, std::string s1, std::string s2) {
-	size_t len = src.length();
+std::string replace(std::string src, const std::string s1, const std::string s2) {
+    size_t pos(0);
 
-	for (size_t i = 0; i < len; ++i) {
-		if (src.compare(i, s1.length(), s1) == 0) {
-			src.erase(i, s1.length());
-			src.insert(i, s2);
-		}
-	}
-	return (src);
+    while ((pos = src.find(s1, pos)) != std::string::npos) {
+        src = src.substr(0, pos) + s2 + src.substr(pos + s1.length());
+        pos += s2.length();
+    }
+    return (src);
 }
 
 int	main(int argc, char **argv) {
