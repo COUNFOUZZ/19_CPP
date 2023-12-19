@@ -1,21 +1,14 @@
 NAME = fixed
 OBJS_DIR = objs
-
 FILES = main.cpp Fixed.cpp
 SRCS = $(FILES)
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:.cpp=.o))
-
-# ===---===---===---===---===---===---===---===---===---===---===---===---
-
 CFLAGS = -Wall -Wextra -Werror -g
 CPPFLAGS = -std=c++98
-
-# ===---===---===---===---===---===---===---===---===---===---===---===---
 
 all: $(OBJS_DIR) $(NAME)
 
 $(OBJS_DIR):
-	@mkdir -p $(OBJS_DIR)
 	@mkdir -p $(OBJS_DIR)
 
 $(NAME): $(OBJS)
