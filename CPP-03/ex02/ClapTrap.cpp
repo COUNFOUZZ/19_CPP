@@ -51,3 +51,10 @@ void	ClapTrap::takeDamage(unsigned int amount) {
 	else
 		this->_hitPoints -= amount;
 }
+
+void	ClapTrap::getAllValue(void) const {
+	std::cout << "Name: " << this->_name << std::endl;
+	std::cout << "Hit Points: " << this->_hitPoints << std::endl;
+	std::cout << "Energy Points: " << this->_energyPoints << std::endl;
+	std::cout << "Attack Damage: " << this->_attackDamage << std::endl;
+}
