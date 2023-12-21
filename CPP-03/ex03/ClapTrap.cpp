@@ -1,6 +1,6 @@
 #include "./ClapTrap.hpp"
 
-ClapTrap::ClapTrap(void) : _name("_clap_name"), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
+ClapTrap::ClapTrap(void) : _name("Default_clap_name"), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
 	std::cout << "Default ClapTrap constructor called !" << std::endl;
 }
 
@@ -50,4 +50,11 @@ void	ClapTrap::takeDamage(unsigned int amount) {
 		this->_hitPoints = 0;
 	else
 		this->_hitPoints -= amount;
+}
+
+void	ClapTrap::getAllValue(void) const {
+	std::cout << "Name: " << this->_name << std::endl;
+	std::cout << "Hit Points: " << this->_hitPoints << std::endl;
+	std::cout << "Energy Points: " << this->_energyPoints << std::endl;
+	std::cout << "Attack Damage: " << this->_attackDamage << std::endl;
 }
