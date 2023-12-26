@@ -22,8 +22,8 @@ Brain&  Brain::operator=(Brain const& dest) {
 }
 
 void    Brain::setNewIdea(int index, std::string str) {
-    if (index < 0 || index > 100) {
-        std::cout << "Bad index, please choose an index between 0 and 100" << std::endl;
+    if (index < 0 || index >= 100) {
+        std::cout << "Bad index, please choose an index between 0 and 99" << std::endl;
         return;
     }
     std::cout << "I have a new idea !" << std::endl;
@@ -36,8 +36,8 @@ void    Brain::getIdea(void) const {
 }
 
 void    Brain::getIdea(int index) const {
-    if (index < 0 || index > 100) {
-        std::cout << "Bad index, please choose an index between 0 and 100" << std::endl;
+    if (index < 0 || index >= 100) {
+        std::cout << "Bad index, please choose an index between 0 and 99" << std::endl;
         return;
     }
     std::cout << index << ". " << this->_ideas[index] << std::endl;

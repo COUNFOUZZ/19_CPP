@@ -9,13 +9,31 @@ int main(void) {
         delete i;
         delete j;
     }
-    std::cout << std::endl << std::endl;
+    std::cout << std::endl << "Delete zoo:" << std::endl;
+    {
+        Animal *zoo[] = {
+            new Dog(),
+            new Dog(),
+            new Cat(),
+            new Cat(),
+            NULL
+	    };
+	
+        std::cout << std::endl;
+        
+        for (int i = 0; zoo[i]; ++i) {
+            std::cout << &zoo[i] << " Deleted !" << std::endl;
+            delete zoo[i];
+            std::cout << std::endl;
+        }
+    }
+    std::cout << std::endl << "Dog and Cat ideas:" << std::endl;
     {
         Dog bob;
         Cat bib;
 
         bob.setNewIdea(10, "I love steack");
-        bob.getIdea(-9);
+        bob.getIdea(100);
         bob.getIdea(10);
         std::cout << std::endl;
         bob.setNewIdea(98, "The water outdoor are terrible to drink !");
