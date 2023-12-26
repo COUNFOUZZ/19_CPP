@@ -1,15 +1,19 @@
 #ifndef WRONGCAT_HPP
 #define WRONGCAT_HPP
 
-#include "./WrongAnimal.hpp"
+#include "WrongAnimal.hpp"
 
-class WrongCat : public WrongAnimal {
+class   WrongCat : public WrongAnimal {
+    private:
+
     public:
-        WrongCat(void);
-        WrongCat(WrongCat const& other); 
-        WrongCat& operator=(WrongCat const& other);
-        ~WrongCat(void);
-        void    makeSound(void) const;
+    WrongCat(void);
+    WrongCat(WrongCat const& other);
+    ~WrongCat(void);
+
+    WrongCat& operator=(WrongCat const& dest);
+
+    void    makeSound(void) const;
 };
 
 #endif
