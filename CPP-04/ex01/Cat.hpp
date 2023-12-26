@@ -1,21 +1,24 @@
 #ifndef CAT_HPP
 #define CAT_HPP
 
-#include "./Animal.hpp"
+#include "Animal.hpp"
 #include "Brain.hpp"
 
-class Cat : public Animal {
+class   Cat : public Animal {
     private:
         Brain*  _brain;
 
     public:
         Cat(void);
-        Cat(Cat const& other); 
-        Cat& operator=(Cat const& other);
+        Cat(Cat const& other);
         ~Cat(void);
+
+        Cat& operator=(Cat const& dest);
+
         void    makeSound(void) const;
-        void    createIdeasRange(int start, int end, std::string idea);
-        void    showIdeasZeroToNb(int nb) const;
+        void    setNewIdea(int index, std::string str);
+        void    getIdea(void) const;
+        void    getIdea(int index) const;
 };
 
 #endif

@@ -1,37 +1,35 @@
-#include "Dog.hpp"
 #include "Cat.hpp"
-#include "WrongCat.hpp"
+#include "Dog.hpp"
 
 int main(void) {
-    // Animal* animals[] = {
-    //     new Cat(),
-    //     new Dog(),
-    //     NULL
-    // };
+    {
+        const Animal* j = new Dog();
+        const Animal* i = new Cat();
 
-    // animals[0]->createIdeasRange(0, 99, "I'm a cat");
-    // animals[1]->createIdeasRange(0, 99, "I'm a dog");
-    // animals[0]->showIdeasZeroToNb(100);
-    // std::cout << std::endl << std::endl;
-    // animals[1]->showIdeasZeroToNb(100);
+        delete i;
+        delete j;
+    }
+    std::cout << std::endl << std::endl;
+    {
+        Dog bob;
+        Cat bib;
 
-    // for (int i = 0; animals[i]; ++i)
-    //     delete animals[i];
+        bob.setNewIdea(10, "I love steack");
+        bob.getIdea(-9);
+        bob.getIdea(10);
+        std::cout << std::endl;
+        bob.setNewIdea(98, "The water outdoor are terrible to drink !");
+        bob.getIdea();
 
-    Animal* animalCat = new Cat();
-    Animal* animalCat2 = new Cat();
+        std::cout << std::endl << std::endl;
 
-    std::cout << "[========================]" << std::endl;
-    animalCat->createIdeasRange(0, 10, "I'm a cat");
-    animalCat->showIdeasZeroToNb(20);
-    std::cout << std::endl << "[------------------------]" << std::endl;
-    animalCat2->showIdeasZeroToNb(20);
-    std::cout << "[========================]" << std::endl;
-    *animalCat2 = *animalCat;
-    std::cout << "[========================]" << std::endl;
-    animalCat2->showIdeasZeroToNb(20);
-    std::cout << std::endl << "[------------------------]" << std::endl;
-    animalCat->showIdeasZeroToNb(20);
-    std::cout << "[========================]" << std::endl;
-    return (0);
+        bib.setNewIdea(10, "I love catisfaction !");
+        bib.getIdea(-9);
+        bib.getIdea(10);
+        std::cout << std::endl;
+        bib.setNewIdea(98, "I love my owner");
+        bib.getIdea();
+    }
+    system("leaks Brain");
+    return 0;
 }
