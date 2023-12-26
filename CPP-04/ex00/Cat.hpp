@@ -7,13 +7,13 @@ class   Cat : public Animal {
     private:
 
     public:
-    Cat(void);
-    Cat(Cat const& other);
-    ~Cat(void);
+        Cat(void);
+        Cat(Cat const& other);
+        ~Cat(void);
 
-    Cat& operator=(Cat const& dest);
+        Cat& operator=(Cat const& dest);
 
-    void    makeSound(void) const;
+        void    makeSound(void) const;
 };
 
 #endif

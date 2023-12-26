@@ -7,13 +7,13 @@ class   WrongCat : public WrongAnimal {
     private:
 
     public:
-    WrongCat(void);
-    WrongCat(WrongCat const& other);
-    ~WrongCat(void);
+        WrongCat(void);
+        WrongCat(WrongCat const& other);
+        ~WrongCat(void);
 
-    WrongCat& operator=(WrongCat const& dest);
+        WrongCat& operator=(WrongCat const& dest);
 
-    void    makeSound(void) const;
+        void    makeSound(void) const;
 };
 
 #endif
