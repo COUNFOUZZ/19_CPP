@@ -48,6 +48,13 @@ int main(void) {
         bib.setNewIdea(98, "I love my owner");
         bib.getIdea();
     }
+    std::cout << std::endl << std::endl;
+    {
+        Dog basic;
+        {
+        Dog tmp = basic;
+        }
+    }
     system("leaks Brain");
     return 0;
 }

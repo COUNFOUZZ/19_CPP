@@ -5,11 +5,9 @@ Cat::Cat(void) : Animal("Cat") {
     this->_brain = new Brain;
 }
 
-Cat::Cat(Cat const& other) : Animal(other._type) {
+Cat::Cat(Cat const& other) : Animal(), _brain(NULL) {
     std::cout << "Copy Cat constructor called" << std::endl;
-    if (this->_brain)
-        delete this->_brain;
-    this->_brain = new Brain(*other._brain);
+    *this = other;
 }
 
 Cat::~Cat(void) {
