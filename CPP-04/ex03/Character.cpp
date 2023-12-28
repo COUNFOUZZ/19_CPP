@@ -5,7 +5,7 @@ Character::Character(void) : ICharacter(), _name("Default_Character_name") {
 		this->_materias[i] = NULL;
 }
 
-Character::Character(std::string name) : _name(name) {
+Character::Character(std::string name) : ICharacter(), _name(name) {
 	for (int i = 0; i < 4; ++i)
 		this->_materias[i] = NULL;
 }
