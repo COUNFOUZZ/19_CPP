@@ -36,7 +36,7 @@ int main(void) {
         
         std::cout << elPatron << std::endl;
     }
-    catch (const std::exception& e) {
+    catch (std::exception& e) {
         std::cerr << e.what() << std::endl;
     }
 
