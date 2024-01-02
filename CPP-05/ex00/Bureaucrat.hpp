@@ -15,12 +15,12 @@ class Bureaucrat {
 			public:
 				const char*	what() const throw();
 		};
-		std::string	_name;
-		int			_grade;
+		const std::string	_name;
+		int					_grade;
 
 	public:
 		Bureaucrat(void);
-		Bureaucrat(const std::string name);
+		Bureaucrat(const std::string name, int grade);
 		Bureaucrat(const Bureaucrat& src);
 		~Bureaucrat(void);
 
