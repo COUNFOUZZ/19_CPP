@@ -1,5 +1,5 @@
 #include "Bureaucrat.hpp"
-#include "AForm.hpp"
+#include "Form.hpp"
 
 int main(void) {
 	
@@ -97,7 +97,7 @@ int main(void) {
 	// }
 
 	// try {
-	// 	AForm a("a", 1, 150);
+	// 	Form a("a", 1, 150);
 	// 	std::cout << a << std::endl;
 	// }
 	// catch (std::exception& e){
@@ -106,15 +106,15 @@ int main(void) {
 
 	{
 		Bureaucrat bob("Bob", 16);
-		AForm	war("war declaration", 15, 5);
+		Form	war("war declaration", 15, 5);
 
-		bob.signAForm(war);
+		bob.signForm(war);
 	}
 	{
 		Bureaucrat bob("Bob", 1);
-		AForm	war("war declaration", 15, 5);
+		Form	war("war declaration", 15, 5);
 
-		bob.signAForm(war);
+		bob.signForm(war);
 	}
 	return 0;
 }
