@@ -13,6 +13,13 @@ const char*	ScalarConverter::InvalidConvertException::what() const throw() {
 	return "is an invalid input to convert !";
 }
 
+void	ScalarConverter::print(std::string input) {
+	std::cout << "char: " << "impossible" << std::endl;
+	std::cout << "int: " << "impossible" << std::endl;
+	std::cout << "float: " << input << "f" << std::endl;
+	std::cout << "double: " << input << std::endl;
+}
+
 void	ScalarConverter::print(char input) {
 	if (!isascii(static_cast<int>(input)))
 		std::cout << "char: " << "Impossible" << std::endl;
@@ -166,6 +173,10 @@ void	ScalarConverter::convert(std::string toBeConverted) {
 		std::stringstream	ss;
 		int					type = -1;
 
+		if (toBeConverted == "nan" || toBeConverted == "-inf" || toBeConverted == "+inf") {
+			print(toBeConverted);
+			return;
+		}
 		type = processInput(toBeConverted, ss);
 		execute(ss, type);
 	} catch (std::exception& e) {

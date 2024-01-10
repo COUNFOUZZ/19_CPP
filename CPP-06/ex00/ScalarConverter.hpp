@@ -24,6 +24,7 @@ class ScalarConverter {
 		ScalarConverter(void);
 		ScalarConverter(const ScalarConverter& src);
 
+		static void	print(std::string input);
 		static void	print(char input);
 		static void	print(int input);
 		static void	print(float input);
