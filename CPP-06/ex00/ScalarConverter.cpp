@@ -44,7 +44,10 @@ void	ScalarConverter::print(float input) {
 		std::cout << "char: " << "Non displayable" << std::endl;
 	else
 		std::cout << "char: " << "'" << static_cast<char>(input) << "'" << std::endl;
-	std::cout << "int: " << static_cast<int>(input) << std::endl;
+	if (input < -2147483648 || input > 2147483647)	// need to put macro INT_MAX and INT_MIN
+		std::cout << "int: " << "overflow" << std::endl;
+	else
+		std::cout << "int: " << static_cast<int>(input) << std::endl;
 	std::cout << "float: " << input << "f" << std::endl;
 	std::cout << "double: " << static_cast<double>(input) << std::endl;
 }
@@ -56,10 +59,18 @@ void	ScalarConverter::print(double input) {
 		std::cout << "char: " << "Non displayable" << std::endl;
 	else
 		std::cout << "char: " << "'" << static_cast<char>(input) << "'" << std::endl;
-	std::cout << "int: " << static_cast<int>(input) << std::endl;
-	std::cout << "float: " << static_cast<float>(input) << "f" << std::endl;
+	if (input < -2147483648 || input > 2147483647)	// need to put macro INT_MAX and INT_MIN
+		std::cout << "int: " << "overflow" << std::endl;
+	else
+		std::cout << "int: " << static_cast<int>(input) << std::endl;
+	if (input < -2147483648 || input > 2147483647)	//	need to put macro FLOAT_MAX and FLOAT_MIN
+		std::cout << "float: " << "overflow" << std::endl;
+	else
+		std::cout << "float: " << input << "f" << std::endl;
 	std::cout << "double: " << input << std::endl;
 }
+
+
 
 void	ScalarConverter::parseInputAndFillInfos(const std::string& input, int& sign, int& printable, int& dot, int& f, int& i_precision) {
 	int	digit = 0, ch = 0;
@@ -107,7 +118,7 @@ int	ScalarConverter::processInput(const std::string& input, std::stringstream& s
 	parseInputAndFillInfos(input, sign, printable, dot, f, i_precision);
 	type = valueType(input, dot, f);
 	if (type == e_float) {
-		std::string			inputFloat(input.substr(0, input.length() - 1));
+		std::string	inputFloat(input.substr(0, input.length() - 1));
 		ss.str(inputFloat);
 	}
 	else
@@ -157,8 +168,7 @@ void	ScalarConverter::convert(std::string toBeConverted) {
 
 		type = processInput(toBeConverted, ss);
 		execute(ss, type);
-	}
-	catch (std::exception& e) {
+	} catch (std::exception& e) {
 		std::cerr << "[" << toBeConverted << "] " << e.what() << std::endl;
 	}
 }
