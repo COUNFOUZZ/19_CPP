@@ -44,7 +44,7 @@ void	ScalarConverter::print(float input) {
 		std::cout << "char: " << "Non displayable" << std::endl;
 	else
 		std::cout << "char: " << "'" << static_cast<char>(input) << "'" << std::endl;
-	if (input < -2147483648 || input > 2147483647)	// need to put macro INT_MAX and INT_MIN
+	if (input < INT_MIN || input > INT_MAX)
 		std::cout << "int: " << "overflow" << std::endl;
 	else
 		std::cout << "int: " << static_cast<int>(input) << std::endl;
@@ -59,11 +59,11 @@ void	ScalarConverter::print(double input) {
 		std::cout << "char: " << "Non displayable" << std::endl;
 	else
 		std::cout << "char: " << "'" << static_cast<char>(input) << "'" << std::endl;
-	if (input < -2147483648 || input > 2147483647)	// need to put macro INT_MAX and INT_MIN
+	if (input < INT_MIN || input > INT_MAX)
 		std::cout << "int: " << "overflow" << std::endl;
 	else
 		std::cout << "int: " << static_cast<int>(input) << std::endl;
-	if (input < -2147483648 || input > 2147483647)	//	need to put macro FLOAT_MAX and FLOAT_MIN
+	if (input < FLT_MIN || input > FLT_MAX)
 		std::cout << "float: " << "overflow" << std::endl;
 	else
 		std::cout << "float: " << input << "f" << std::endl;
