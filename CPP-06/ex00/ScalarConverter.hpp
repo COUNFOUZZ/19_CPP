@@ -7,6 +7,7 @@
 #include <float.h>
 #include <string>
 #include <stdexcept>
+#include <iomanip>
 
 class ScalarConverter {
 	private:
@@ -24,15 +25,16 @@ class ScalarConverter {
 		ScalarConverter(void);
 		ScalarConverter(const ScalarConverter& src);
 
-		static void	print(std::string input);
-		static void	print(char input);
-		static void	print(int input);
-		static void	print(float input);
-		static void	print(double input);
-		static void	parseInputAndFillInfos(const std::string& input, int& sign, int& printable, int& dot, int& f, int& i_precision);
-		static int	processInput(const std::string& input, std::stringstream& ss);
-		static int	valueType(const std::string input, int dot, int f);
-		static void	execute(std::stringstream& ss, int type);
+		static size_t	findPrecision(std::string input);
+		static int		processInput(const std::string& input, std::stringstream& ss);
+		static int		valueType(const std::string input, int dot, int f);
+		static void		print(std::string input, size_t precision);
+		static void		print(char input, size_t precision);
+		static void		print(int input, size_t precision);
+		static void		print(float input, size_t precision);
+		static void		print(double input, size_t precision);
+		static void		parseInputAndFillInfos(const std::string& input, int& sign, int& printable, int& dot, int& f);
+		static void		execute(std::string& input, std::stringstream& ss, int type);
 
 	public:
 		~ScalarConverter(void);
