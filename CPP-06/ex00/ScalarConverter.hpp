@@ -24,6 +24,9 @@ class ScalarConverter {
 		};
 		ScalarConverter(void);
 		ScalarConverter(const ScalarConverter& src);
+		~ScalarConverter(void);
+
+		ScalarConverter&	operator=(const ScalarConverter& dest);
 
 		static size_t	findPrecision(std::string input);
 		static int		processInput(const std::string& input, std::stringstream& ss);
@@ -37,10 +40,6 @@ class ScalarConverter {
 		static void		execute(std::string& input, std::stringstream& ss, int type);
 
 	public:
-		~ScalarConverter(void);
-
-		ScalarConverter&	operator=(const ScalarConverter& dest);
-
 		static void	convert(std::string toBeConverted);
 };
 
