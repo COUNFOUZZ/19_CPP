@@ -37,7 +37,7 @@ class RandomClass {
 		 }
 
 		void	printTab(void) const	{ iter(this->_tab, this->_length, &print); }
-		void	add(void) 				{ iter(this->_tab, this->_length, &fctIncrement); }
+		void	increase(void) 				{ iter(this->_tab, this->_length, &fctIncrement); }
 		void	decrease(void)			{ iter(this->_tab, this->_length, &fctDecremente); }
 };
 
@@ -49,11 +49,17 @@ int main(void) {
 	std::cout << std::endl;
 	iter(tab, 3, &fctIncrement);
 	iter(tab, 3, &print);
+	iter(tab, 3, &fctDecremente);
+	iter(tab, 3, &print);
 	std::cout << std::endl;
+
 	std::cout << "Class part:" << std::endl;
 	obj.printTab();
-	std::cout << std::endl;
+	std::cout << "obj.decrease()" << std::endl;
 	obj.decrease();
+	obj.printTab();
+	std::cout << "obj.increase()" << std::endl;
+	obj.increase();
 	obj.printTab();
 
 	return 0;
