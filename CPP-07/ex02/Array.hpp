@@ -17,18 +17,18 @@ class Array {
 		};
 
 	public:
-		Array<T>(void) : _array(NULL), _size(0) {}
-		Array<T>(unsigned int n) : _array(new T[n]), _size(n) {}
-		~Array<T>(void) { 
+		Array(void) : _array(NULL), _size(0) {}
+		Array(unsigned int n) : _array(new T[n]), _size(n) {}
+		~Array(void) { 
 			delete[] this->_array;
 			this->_array = NULL;
 		}
 
-		Array<T>(const Array<T>& toCopy) : _array(NULL), _size(0) {
+		Array(const Array& toCopy) : _array(NULL), _size(0) {
 			*this = toCopy;
 		}
 
-		Array<T>&	operator=(const Array<T>& dest) {
+		Array&	operator=(const Array& dest) {
 			if (this == &dest)
 				return *this;
 			this->_size = dest._size;
