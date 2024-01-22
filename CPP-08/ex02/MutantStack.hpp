@@ -6,7 +6,6 @@
 #include <iterator>
 
 template<typename T, typename Y = std::deque<T> >
-
 class	MutantStack : public std::stack<T, Y> {
 	private:
 		std::stack<T, Y>	_stack;
