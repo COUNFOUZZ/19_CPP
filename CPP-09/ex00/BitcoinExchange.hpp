@@ -10,11 +10,17 @@
 
 class BitcoinExchange {
 	private:
-		std::map<std::string, double>	_bitcoinsPrices;
+		std::map<std::string, double>	_csvContainer;
+		std::map<std::string, double>	_inputContainer;
 		std::string						_pathFile;
+
 		BitcoinExchange(void) {}
 		BitcoinExchange(const BitcoinExchange& src) { static_cast<void>(src); }
+
 		void	fillMapCSV(std::ifstream& file);
+		void	fillMapInput(std::ifstream& file);
+		void	printContainer(const std::map<std::string, double>& c) const;
+
 		class ImpossibleToConvertStringStreamException : public std::exception {
 			public:
 				const char*	what(void) const throw() {
@@ -33,6 +39,7 @@ class BitcoinExchange {
 		~BitcoinExchange(void);
 
 		BitcoinExchange&	operator=(const BitcoinExchange& dest);
+
 };
 
 #endif
