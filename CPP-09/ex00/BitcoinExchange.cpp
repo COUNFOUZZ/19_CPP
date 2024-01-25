@@ -98,21 +98,18 @@ bool	BitcoinExchange::checkAndInitInput(std::string& date, double& coins, std::s
 	return true;
 }
 
-std::map<std::string, double>::const_iterator	BitcoinExchange::getIterator(std::string& date) const {
+std::map<std::string, double>::const_iterator	BitcoinExchange::getIterator(const std::string date) const {
 	std::map<std::string, double>::const_iterator	it;
 
-	for (it = this->_csvContainer.begin(); it != this->_csvContainer.end(); ++it) {
-		if (it->first == date) {
-			std::cout << "ok" << std::endl;
-			return it;
-		}
-	}
-	return this->_csvContainer.end();
+	if (this->_csvContainer.count(date))
+		for (it = this->_csvContainer.begin(); it != this->_csvContainer.end(); ++it)
+			if (it->first == date)
+				return it;
+	return this->_csvContainer.lower_bound(date);
 }
 
 void	BitcoinExchange::execute(const std::string& date, const double& coins, const std::map<std::string, double>::const_iterator& it) const {
-	static_cast<void>(it);
-	std::cout << date << " => " << coins << std::endl;
+	std::cout << date << " => " << coins << " = " << coins * it->second << std::endl;
 }
 
 void	BitcoinExchange::inputHandler(std::ifstream& file) {
@@ -143,17 +140,17 @@ void	BitcoinExchange::inputHandler(std::ifstream& file) {
 	file.close();
 }
 
+void	BitcoinExchange::printContainer(const std::map<std::string, double>& c) const {
+	std::map<std::string, double>::const_iterator	it;
+
+	for (it = c.begin(); it != c.end(); ++it)
+		std::cout << "Date: " << it->first << " Value: " << it->second << std::endl;
+}
+
 BitcoinExchange&	BitcoinExchange::operator=(const BitcoinExchange& dest) {
 	if (this == &dest)
 		return *this;
 	this->_csvContainer = dest._csvContainer;
 	this->_pathFile = dest._pathFile;
 	return *this;
-}
-
-void	BitcoinExchange::printContainer(const std::map<std::string, double>& c) const {
-	std::map<std::string, double>::const_iterator	it;
-
-	for (it = c.begin(); it != c.end(); ++it)
-		std::cout << "Date: " << it->first << " Value: " << it->second << std::endl;
 }

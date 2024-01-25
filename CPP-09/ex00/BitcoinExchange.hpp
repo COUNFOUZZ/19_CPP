@@ -21,9 +21,9 @@ class BitcoinExchange {
 		bool	checkAndInitInput(std::string& date, double& coins, std::string& year, std::string& month, std::string& day) const;
 		void	inputHandler(std::ifstream& file);
 		void	printContainer(const std::map<std::string, double>& c) const;
-		std::map<std::string, double>::const_iterator	getIterator(std::string& date) const;
+		std::map<std::string, double>::const_iterator	getIterator(const std::string date) const;
 		void	execute(const std::string& date, const double& coins, const std::map<std::string, double>::const_iterator& it) const;
-
+		
 		class ImpossibleToConvertStringStreamException : public std::exception {
 			public:
 				const char*	what(void) const throw() {
