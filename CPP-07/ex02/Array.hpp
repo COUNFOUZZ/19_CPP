@@ -45,7 +45,7 @@ class Array {
 		}
 
 		T& operator[](int index) {
-			if (index < 0 || index >= static_cast<int>(_size))
+			if (index < 0 || index >= static_cast<int>(this->_size))
 				throw OutOfBoundException();
 			return _array[index];
 		}
