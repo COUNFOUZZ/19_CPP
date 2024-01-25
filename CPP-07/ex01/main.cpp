@@ -37,7 +37,7 @@ class RandomClass {
 		 }
 
 		void	printTab(void) const	{ iter(this->_tab, this->_length, &print); }
-		void	increase(void) 				{ iter(this->_tab, this->_length, &fctIncrement); }
+		void	increase(void) 			{ iter(this->_tab, this->_length, &fctIncrement); }
 		void	decrease(void)			{ iter(this->_tab, this->_length, &fctDecremente); }
 };
 
