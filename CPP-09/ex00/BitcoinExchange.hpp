@@ -17,10 +17,12 @@ class BitcoinExchange {
 		BitcoinExchange(const BitcoinExchange& src) { static_cast<void>(src); }
 
 		void	fillMapCSV(std::ifstream& file);
-		bool	checkDate(int year, int month, int day) const;
-		void	checkInput(std::string& date, double& coins) const;
+		bool	checkDate(const int year, const int month, const int day) const;
+		bool	checkAndInitInput(std::string& date, double& coins, std::string& year, std::string& month, std::string& day) const;
 		void	inputHandler(std::ifstream& file);
 		void	printContainer(const std::map<std::string, double>& c) const;
+		std::map<std::string, double>::const_iterator	getIterator(std::string& date) const;
+		void	execute(const std::string& date, const double& coins, const std::map<std::string, double>::const_iterator& it) const;
 
 		class ImpossibleToConvertStringStreamException : public std::exception {
 			public:
