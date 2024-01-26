@@ -102,10 +102,11 @@ std::map<std::string, double>::const_iterator	BitcoinExchange::getIterator(const
 	std::map<std::string, double>::const_iterator	it;
 
 	if (this->_csvContainer.count(date))
-		for (it = this->_csvContainer.begin(); it != this->_csvContainer.end(); ++it)
-			if (it->first == date)
-				return it;
-	return this->_csvContainer.lower_bound(date);
+		return this->_csvContainer.find(date);
+	it = this->_csvContainer.lower_bound(date);
+	if (it != this->_csvContainer.begin())
+		--it;
+	return it;
 }
 
 void	BitcoinExchange::execute(const std::string& date, const double& coins, const std::map<std::string, double>::const_iterator& it) const {
