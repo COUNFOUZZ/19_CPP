@@ -51,53 +51,6 @@ bool	BitcoinExchange::checkDate(const int year, const int month, const int day) 
 	}
 }
 
-bool	BitcoinExchange::checkAndInitInput(std::string& date, double& coins, std::string& year, std::string& month, std::string& day) const {
-	std::stringstream	ssYear, ssMonth, ssDay;
-	int					iYear, iMonth, iDay;
-
-	year = date.substr(0, 4);
-	month = date.substr(year.length() + 1, 2);
-	day = date.substr(year.length() + month.length() + 2);
-
-	ssYear << year;
-	ssMonth << month;
-	ssDay << day;
-
-	ssYear >> iYear;
-	if (ssYear.fail())
-		throw ImpossibleToConvertStringStreamException();
-	ssMonth >> iMonth;
-	if (ssMonth.fail())
-		throw ImpossibleToConvertStringStreamException();
-	ssDay >> iDay;
-	if (ssDay.fail())
-		throw ImpossibleToConvertStringStreamException();
-
-	try {
-		if (coins < 0)
-			throw NegativeCoinException();
-		else if (coins > 1000)
-			throw TooLargeNumberException();
-		else if (!checkDate(iYear, iMonth, iDay) || year.empty() || month.empty() || day.empty())
-			throw InvalidDateException();
-		
-	} catch (InvalidDateException& e) {
-		std::cerr << e.what() << year << "-" << month << "-" << day << std::endl;
-		return false;
-	} catch	(std::exception& e) {
-		std::cerr << e.what() << std::endl;
-		return false;
-	}
-
-	ssYear.clear();
-	ssYear.str("");
-	ssMonth.clear();
-	ssMonth.str("");
-	ssDay.clear();
-	ssDay.str("");
-	return true;
-}
-
 std::map<std::string, double>::const_iterator	BitcoinExchange::getIterator(const std::string date) const {
 	std::map<std::string, double>::const_iterator	it;
 
@@ -114,38 +67,33 @@ void	BitcoinExchange::execute(const std::string& date, const double& coins, cons
 }
 
 void	BitcoinExchange::inputHandler(std::ifstream& file) {
-	std::string			line, date, strCoins, year, month, day;
-	std::stringstream	ssCoins;
-	double				coins;
+	std::string	line, date;
+	int			year, month, day;
+	char		sep1, sep2, sep3;
+	double		amount;
 
 	if (std::getline(file, line)) {
 		while (std::getline(file, line)) {
-			year.clear();
-			month.clear();
-			day.clear();
-			ssCoins.clear();
-			ssCoins.str("");
-			date = line.substr(0, line.find('|') - 1);
-			strCoins = line.substr(line.find('|') + 2); 
-			ssCoins << strCoins;
-			ssCoins >> coins;
-			if (ssCoins.fail())
-				throw ImpossibleToConvertStringStreamException();
-			if (checkAndInitInput(date, coins, year, month, day)) {
-				execute(date, coins, getIterator(date));
+			try {
+				std::stringstream	ssLine(line);
+
+				ssLine >> year >> sep1 >> month >> sep2 >> day >> sep3 >> amount;
+				if (ssLine.fail() || !checkDate(year, month, day) || sep1 != '-' || sep2 != '-' || sep3 != '|' || line[line.find('|') - 1] != ' ' || line[line.find('|') + 1] != ' ')
+					throw BadInputException();
+				else if (amount < 0)
+					throw NegativeCoinException();
+				else if (amount > 1000)
+					throw TooLargeNumberException();
+				date = line.substr(0, line.find(" |"));
+				execute(date, amount, getIterator(date));
+			} catch (BadInputException& e) {
+				std::cerr << e.what() << line << std::endl;
+			} catch	(std::exception& e) {
+				std::cerr << e.what() << std::endl;
 			}
-			else
-				continue;
 		}
 	}
 	file.close();
-}
-
-void	BitcoinExchange::printContainer(const std::map<std::string, double>& c) const {
-	std::map<std::string, double>::const_iterator	it;
-
-	for (it = c.begin(); it != c.end(); ++it)
-		std::cout << "Date: " << it->first << " Value: " << it->second << std::endl;
 }
 
 BitcoinExchange&	BitcoinExchange::operator=(const BitcoinExchange& dest) {

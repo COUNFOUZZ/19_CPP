@@ -17,10 +17,9 @@ class BitcoinExchange {
 		BitcoinExchange(const BitcoinExchange& src) { static_cast<void>(src); }
 
 		void	fillMapCSV(std::ifstream& file);
+		bool	checkLine(std::string line) const;
 		bool	checkDate(const int year, const int month, const int day) const;
-		bool	checkAndInitInput(std::string& date, double& coins, std::string& year, std::string& month, std::string& day) const;
 		void	inputHandler(std::ifstream& file);
-		void	printContainer(const std::map<std::string, double>& c) const;
 		std::map<std::string, double>::const_iterator	getIterator(const std::string date) const;
 		void	execute(const std::string& date, const double& coins, const std::map<std::string, double>::const_iterator& it) const;
 		
@@ -42,7 +41,7 @@ class BitcoinExchange {
 					return "Error: too large a number.";
 				}
 		};
-		class InvalidDateException : public std::exception {
+		class BadInputException : public std::exception {
 			public:
 				const char*	what(void) const throw() {
 					return "Error: bad input => ";
