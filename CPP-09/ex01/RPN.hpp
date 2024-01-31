@@ -14,6 +14,12 @@ class RPN {
 					return "Error: stringstream failed.";
 				}
 		};
+		class DivideByZeroException : public std::exception {
+			public:
+				const char* what(void) const throw() {
+					return "Error: impossible to divide by zero.";
+				}
+		};
 		std::stack<int>	_cStack;
 		RPN(void);
 		RPN(const RPN& src);

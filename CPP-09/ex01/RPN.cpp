@@ -23,31 +23,21 @@ void	RPN::execute(const char sign) {
 	if (this->_cStack.size() < 2)
 		return;
 
-	if (sign == '+') {
-		nbrTmp = this->_cStack.top();
-		this->_cStack.pop();
+	nbrTmp = this->_cStack.top();
+	this->_cStack.pop();
+	if (sign == '+')
 		nbrTmp = this->_cStack.top() + nbrTmp;
-		this->_cStack.pop();
-		this->_cStack.push(nbrTmp);
-	} else if (sign == '-') {
-		nbrTmp = this->_cStack.top();
-		this->_cStack.pop();
+	else if (sign == '-')
 		nbrTmp = this->_cStack.top() - nbrTmp;
-		this->_cStack.pop();
-		this->_cStack.push(nbrTmp);
-	} else if (sign == '*') {
-		nbrTmp = this->_cStack.top();
-		this->_cStack.pop();
+	else if (sign == '*')
 		nbrTmp = this->_cStack.top() * nbrTmp;
-		this->_cStack.pop();
-		this->_cStack.push(nbrTmp);
-	} else {
-		nbrTmp = this->_cStack.top();
-		this->_cStack.pop();
+	else {
+		if (!nbrTmp)
+			throw DivideByZeroException();
 		nbrTmp = this->_cStack.top() / nbrTmp;
-		this->_cStack.pop();
-		this->_cStack.push(nbrTmp);
 	}
+	this->_cStack.pop();
+	this->_cStack.push(nbrTmp);
 }
 
 RPN::RPN(const std::string str) {
@@ -62,8 +52,8 @@ RPN::RPN(const std::string str) {
 			peekBuf = ss.peek();
 		} else if (isdigit(peekBuf)) {
 			ss >> nbr;
-			if (!isspace(ss.peek()))
-				throw BadInputException();
+			if (ss.fail())
+				throw ErrorStringStreamException();
 			this->_cStack.push(nbr);
 		} else if (isSign(peekBuf)) {
 			ss.ignore();
