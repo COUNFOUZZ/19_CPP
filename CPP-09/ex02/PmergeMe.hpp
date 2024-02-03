@@ -20,6 +20,8 @@ class PmergeMe {
 		PmergeMe(const PmergeMe& src);
 		PmergeMe&	operator=(const PmergeMe& dest);
 
+		void	swap(std::list<int>::iterator& a, std::list<int>::iterator& b);
+
 	public:
 		class InvalidArgException : public std::exception {
 			public:
@@ -38,6 +40,7 @@ class PmergeMe {
 
 		void	parseInput(std::string str);
 		void	printContainer(void) const;
+		void	insertionSort(void);
 };
 
 #endif
