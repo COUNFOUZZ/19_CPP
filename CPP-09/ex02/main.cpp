@@ -1,7 +1,7 @@
 #include "PmergeMe.hpp"
 
 int main(int argc, const char** argv) {
-	int			i;
+	int			i = 0;
 
 	try {
 		if (argc < 2)
@@ -10,9 +10,15 @@ int main(int argc, const char** argv) {
 
 		for (i = 1; i < argc; ++i)
 			obj.parseInput(argv[i]);
-		obj.printContainer();
+		std::cout << "List : ";
+		printContainer(obj.getList());
+		std::cout << "Vector : ";
+		printContainer(obj.getVector());
 		obj.insertionSort();
-		obj.printContainer();
+		std::cout << "List : ";
+		printContainer(obj.getList());
+		std::cout << "Vector : ";
+		printContainer(obj.getVector());
 	} catch (PmergeMe::BadInputException& e) {
 		std::cerr << e.what() << argv[i] << std::endl;
 	} catch (std::exception& e) {

@@ -1,10 +1,12 @@
 #include "PmergeMe.hpp"
 
 //	private:
-PmergeMe::PmergeMe(const PmergeMe& src) : _cList() { *this = src; }
+PmergeMe::PmergeMe(const PmergeMe& src) : _cList(), _cVec() { *this = src; }
 PmergeMe&	PmergeMe::operator=(const PmergeMe& dest) {
 	if (this == &dest)
 		return *this;
+	this->_cList = dest._cList;
+	this->_cVec = dest._cVec;
 	return *this;
 }
 
@@ -15,16 +17,8 @@ void	PmergeMe::swap(std::list<int>::iterator& a, std::list<int>::iterator& b) {
 }
 
 //	public:
-PmergeMe::PmergeMe(void) : _cList() {}
+PmergeMe::PmergeMe(void) : _cList(), _cVec() {}
 PmergeMe::~PmergeMe(void) {}
-
-void	PmergeMe::printContainer(void) const {
-	std::list<int>::const_iterator	it;
-
-	for (it = this->_cList.begin(); it != this->_cList.end(); ++it)
-		std::cout << *it << " ";
-	std::cout << std::endl;
-}
 
 void	PmergeMe::parseInput(std::string str) {
 	std::stringstream	ss(str);
@@ -38,6 +32,7 @@ void	PmergeMe::parseInput(std::string str) {
 			if (ss.fail())
 				throw InvalidStringStreamException();
 			this->_cList.push_back(value);
+			this->_cVec.push_back(value);
 		} else if (buffer == '-') {
 			ss.ignore();
 			if (isdigit(ss.peek())) {
@@ -67,4 +62,19 @@ void	PmergeMe::insertionSort(void) {
 			--it;
 		}
 	}
+}
+
+void	PmergeMe::mergeSort(void) {
+	if (this->_cList.size() < 2)
+		return;
+	
+}
+
+//	Getters
+const std::list<int>	PmergeMe::getList(void) const {
+	return this->_cList;
+}
+
+const std::vector<int>	PmergeMe::getVector(void) const {
+	return this->_cVec;
 }

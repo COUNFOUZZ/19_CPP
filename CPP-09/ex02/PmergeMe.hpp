@@ -5,8 +5,18 @@
 #include <string>
 #include <stdexcept>
 #include <list>
+#include <vector>
 #include <sstream>
 #include <iterator>
+
+template<typename T>
+void	printContainer(const T& container) {
+	typename T::const_iterator	it;
+
+	for (it = container.begin(); it != container.end(); ++it)
+		std::cout << *it << " ";
+	std::cout << std::endl;
+}
 
 class PmergeMe {
 	private:
@@ -16,7 +26,9 @@ class PmergeMe {
 					return "Error: string stream failed.";
 				}
 		};
-		std::list<int>	_cList;
+
+		std::list<int>		_cList;
+		std::vector<int>	_cVec;
 		PmergeMe(const PmergeMe& src);
 		PmergeMe&	operator=(const PmergeMe& dest);
 
@@ -35,12 +47,15 @@ class PmergeMe {
 					return "Error: invalid input => ";
 				}
 		};
+
 		PmergeMe(void);
 		~PmergeMe(void);
 
-		void	parseInput(std::string str);
-		void	printContainer(void) const;
-		void	insertionSort(void);
+		void					parseInput(std::string str);
+		void					insertionSort(void);
+		void					mergeSort(void);
+		const std::list<int>	getList(void) const;
+		const std::vector<int>	getVector(void) const;
 };
 
 #endif
