@@ -10,12 +10,6 @@ PmergeMe&	PmergeMe::operator=(const PmergeMe& dest) {
 	return *this;
 }
 
-void	PmergeMe::swap(std::list<int>::iterator& a, std::list<int>::iterator& b) {
-	int	tmp = *a;
-	*a = *b;
-	*b = tmp;
-}
-
 //	public:
 PmergeMe::PmergeMe(void) : _cList(), _cVec() {}
 PmergeMe::~PmergeMe(void) {}
@@ -48,33 +42,68 @@ void	PmergeMe::parseInput(std::string str) {
 	}
 }
 
-void	PmergeMe::insertionSort(void) {
-	if (this->_cList.size() < 2)
-		return;
-	
-	std::list<int>::iterator	it;
-	std::list<int>::iterator	second;
+// void	PmergeMe::sortList(void) {
+// 	std::list<int>::iterator it, second;
 
-	for (it = this->_cList.begin(); it != this->_cList.end(); ++it) {
-		second = it;
-		while (second != this->_cList.begin() && *it < *(--second)) {
-			swap(it, second);
-			--it;
-		}
-	}
+// 	for (it = this->_cList.begin(); it != this->_cList.end(); ++it) {
+// 		int key = *it;
+// 		second = it;
+// 		while (second != this->_cList.begin() && key < *(--second)) {
+// 			std::iter_swap(it, second);
+// 			--it;
+// 		}
+// 	}
+// }
+
+// void	PmergeMe::sortVector(void) {
+// 	std::vector<int>::iterator it, second;
+
+// 	for (it = this->_cVec.begin(); it != this->_cVec.end(); ++it) {
+// 		int key = *it;
+// 		second = it;
+// 		while (second != this->_cVec.begin() && key < *(--second)) {
+// 			std::iter_swap(it, second);
+// 			--it;
+// 		}
+// 	}
+// }
+
+// void	PmergeMe::insertionSort(int listOrVector) {
+// 	if (this->_cList.size() < 2)
+// 		return;
+// 	if (!listOrVector)
+// 		sortList();
+// 	else if (listOrVector == 1)
+// 		sortVector();
+// 	else
+// 		return;
+// }
+
+
+
+void	PmergeMe::mergeSortHanling(std::list<int>& list) {
+	if (list.size() < 2)
+		return;
+	std::list<int>				left, right;
+	std::list<int>::iterator	middle;
+	
+	std::advance(middle, list.size() / 2);
+	left.assign(list.begin(), middle);
+	right.assign(middle, list.end());
+
+
+	list.clear();
 }
 
 void	PmergeMe::mergeSort(void) {
-	if (this->_cList.size() < 2)
-		return;
-	
+	mergeSortHanling(this->_cList);
 }
 
 //	Getters
-const std::list<int>	PmergeMe::getList(void) const {
+std::list<int>&	PmergeMe::getList(void) {
 	return this->_cList;
 }
 
-const std::vector<int>	PmergeMe::getVector(void) const {
+std::vector<int>&	PmergeMe::getVector(void) {
 	return this->_cVec;
 }

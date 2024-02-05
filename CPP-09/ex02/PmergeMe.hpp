@@ -18,6 +18,29 @@ void	printContainer(const T& container) {
 	std::cout << std::endl;
 }
 
+template<typename T>
+void	swap(typename T::iterator& a, typename T::iterator& b) {
+	int	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
+template<typename T>
+void insertionSort(T& container) {
+	if (container.size() < 2)
+		return;
+	typename T::iterator it, second;
+
+	for (it = container.begin(); it != container.end(); ++it) {
+		int key = *it;
+		second = it;
+		while (second != container.begin() && key < *(--second)) {
+			std::swap(it, second);
+			--it;
+		}
+	}
+}
+
 class PmergeMe {
 	private:
 		class InvalidStringStreamException : public std::exception {
@@ -32,7 +55,9 @@ class PmergeMe {
 		PmergeMe(const PmergeMe& src);
 		PmergeMe&	operator=(const PmergeMe& dest);
 
-		void	swap(std::list<int>::iterator& a, std::list<int>::iterator& b);
+		void	mergeSortHanling(std::list<int>& list);
+		// void	sortList(void);
+		// void	sortVector(void);
 
 	public:
 		class InvalidArgException : public std::exception {
@@ -52,10 +77,10 @@ class PmergeMe {
 		~PmergeMe(void);
 
 		void					parseInput(std::string str);
-		void					insertionSort(void);
+		// void					insertionSort(int listOrVector);
 		void					mergeSort(void);
-		const std::list<int>	getList(void) const;
-		const std::vector<int>	getVector(void) const;
+		std::list<int>&	getList(void);
+		std::vector<int>&	getVector(void);
 };
 
 #endif
