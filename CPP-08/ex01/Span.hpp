@@ -17,10 +17,10 @@ class Span {
 					return "Exception error: the container is full !";
 				}
 		};
-		class MaxUINTException : public std::exception {
+		class MaxMinINTException : public std::exception {
 			public:
 				const char*	what(void)	const throw() {
-					return "Exception error: your number is greater than an unsigned int !";
+					return "Exception error: your number is greater or lower than an int !";
 				}
 		};
 		class NoSpanFoundException : public std::exception {
@@ -38,7 +38,8 @@ class Span {
 
 		Span&	operator=(const Span& dest);
 
-		void			addNumber(unsigned int nbr);
+		void			addNumber(int nbr);
+		void			rangeOfIterator(unsigned int size, int value);
 		unsigned int	shortestSpan(void) const;
 		unsigned int	longestSpan(void) const;
 };

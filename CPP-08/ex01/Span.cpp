@@ -13,11 +13,11 @@ Span&	Span::operator=(const Span& dest) {
 	return *this;
 }
 
-void	Span::addNumber(unsigned int nbr) {
+void	Span::addNumber(int nbr) {
 	if (this->_container.size() >= this->_sizeMax)
 		throw ContainerFullException();
-	if (nbr > UINT_MAX)
-		throw MaxUINTException();
+	if (nbr > INT_MAX || nbr < INT_MIN)
+		throw MaxMinINTException();
 	this->_container.push_back(nbr);
 }
 
@@ -44,4 +44,9 @@ unsigned int	Span::longestSpan(void) const {
 	max = std::max_element(this->_container.begin(), this->_container.end());
 	min = std::min_element(this->_container.begin(), this->_container.end());
 	return *max - *min;
+}
+
+void	Span::rangeOfIterator(unsigned int size, int value) {
+	for (size_t	i = 0; i <  size; ++i)
+		this->addNumber(value);
 }
