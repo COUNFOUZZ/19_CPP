@@ -5,6 +5,7 @@
 #include <iterator>
 #include <algorithm>
 #include <stdexcept>
+#include <vector>
 
 class EmptyContainerException : public std::exception {
 	public:
