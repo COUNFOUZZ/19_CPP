@@ -19,13 +19,6 @@ void	printContainer(const T& container) {
 }
 
 template<typename T>
-void	swap(typename T::iterator& a, typename T::iterator& b) {
-	int	tmp = *a;
-	*a = *b;
-	*b = tmp;
-}
-
-template<typename T>
 void insertionSort(T& container) {
 	if (container.size() < 2)
 		return;
@@ -35,7 +28,7 @@ void insertionSort(T& container) {
 		int key = *it;
 		second = it;
 		while (second != container.begin() && key < *(--second)) {
-			std::swap(it, second);
+			std::swap(*it, *second);
 			--it;
 		}
 	}

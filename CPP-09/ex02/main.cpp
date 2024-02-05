@@ -14,6 +14,11 @@ int main(int argc, const char** argv) {
 		printContainer(obj.getList());
 		insertionSort(obj.getList());
 		printContainer(obj.getList());
+
+		std::cout << "Vector : ";
+		printContainer(obj.getVector());
+		insertionSort(obj.getVector());
+		printContainer(obj.getVector());
 	} catch (PmergeMe::BadInputException& e) {
 		std::cerr << e.what() << argv[i] << std::endl;
 	} catch (std::exception& e) {
