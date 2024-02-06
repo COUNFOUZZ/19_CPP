@@ -10,16 +10,9 @@ int main(int argc, const char** argv) {
 
 		for (i = 1; i < argc; ++i)
 			obj.parseInput(argv[i]);
-		// std::cout << "List : ";
-		// printContainer(obj.getList());
-		// insertionSort(obj.getList());
-		// printContainer(obj.getList());
-
-		// std::cout << "Vector : ";
-		// printContainer(obj.getVector());
-		// insertionSort(obj.getVector());
-		// printContainer(obj.getVector());
 		obj.sort();
+	} catch (PmergeMe::DoubleException& e) {
+		std::cerr << e.what() << std::endl;
 	} catch (PmergeMe::BadInputException& e) {
 		std::cerr << e.what() << argv[i] << std::endl;
 	} catch (std::exception& e) {

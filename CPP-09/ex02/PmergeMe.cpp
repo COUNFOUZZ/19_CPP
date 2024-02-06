@@ -1,17 +1,19 @@
 #include "PmergeMe.hpp"
 
 //	private:
-PmergeMe::PmergeMe(const PmergeMe& src) : _cList(), _cVec() { *this = src; }
+PmergeMe::PmergeMe(const PmergeMe& src) : _cList(), _cVec(), timeList(0), timeVector(0) { *this = src; }
 PmergeMe&	PmergeMe::operator=(const PmergeMe& dest) {
 	if (this == &dest)
 		return *this;
 	this->_cList = dest._cList;
 	this->_cVec = dest._cVec;
+	this->timeList = dest.timeList;
+	this->timeVector = dest.timeVector;
 	return *this;
 }
 
 //	public:
-PmergeMe::PmergeMe(void) : _cList(), _cVec() {}
+PmergeMe::PmergeMe(void) : _cList(), _cVec(), timeList(0), timeVector(0) {}
 PmergeMe::~PmergeMe(void) {}
 
 void	PmergeMe::parseInput(std::string str) {
@@ -40,42 +42,34 @@ void	PmergeMe::parseInput(std::string str) {
 			throw BadInputException();
 		}
 	}
-}
-
-void	PmergeMe::merge(std::list<int>& list, std::list<int>& left, std::list<int>& right) {
-	std::list<int>::iterator	itLeft = left.begin();
-	std::list<int>::iterator	itRight = right.begin();
-	
-	printContainer(left);
-	printContainer(right);
-	while (itLeft != left.end() && itRight != right.end())
-		*itLeft > *itRight ? list.push_back(*itRight++) : list.push_back(*itLeft++);
-	while (itLeft != left.end())
-		list.push_back(*itLeft++);
-	while (itRight != right.end())
-		list.push_back(*itRight++);
-}
-
-void	PmergeMe::mergeSortHanling(std::list<int>& list) {
-	if (list.size() <= SIZE_ARRAY) {
-		insertionSort(list);
-		return;
-	}
-	std::list<int>				left, right;
-	std::list<int>::iterator	middle = list.begin();
-	
-	std::advance(middle, list.size() / 2);
-	left.assign(list.begin(), middle);
-	right.assign(middle, list.end());
-	mergeSortHanling(left);
-	mergeSortHanling(right);
-	list.clear();
-	merge(list, left, right);
+	std::set<int>	checkDouble(this->_cList.begin(), this->_cList.end());
+	if (checkDouble.size() != this->_cList.size())
+		throw DoubleException();
 }
 
 void	PmergeMe::sort(void) {
-	mergeSortHanling(this->_cList);
+	timeval	start, end, diff;
+
+	std::cout << "Before: ";
 	printContainer(this->_cList);
+
+	gettimeofday(&start, 0);
+	mergeSortHanling(this->_cList);
+	gettimeofday(&end, 0);
+	timersub(&end, &start, &diff);
+	this->timeList = (diff.tv_sec * 1000000.0 + diff.tv_usec) / 1000000.0;
+
+	gettimeofday(&start, 0);
+	mergeSortHanling(this->_cVec);
+	gettimeofday(&end, 0);
+	timersub(&end, &start, &diff);
+	this->timeVector = (diff.tv_sec * 1000000.0 + diff.tv_usec) / 1000000.0;
+
+	std::cout << "After: ";
+	printContainer(this->_cList);
+
+	std::cout << "Time to process a range of " << std::fixed << this->_cList.size() << " elements with list : " << this->timeList << " s" << std::endl;
+	std::cout << "Time to process a range of " << std::fixed << this->_cList.size() << " elements with vector : " << this->timeVector << " s" << std::endl;
 }
 
 //	Getters

@@ -4,10 +4,12 @@
 #include <iostream>
 #include <string>
 #include <stdexcept>
+#include <set>
 #include <list>
 #include <vector>
 #include <sstream>
 #include <iterator>
+#include <sys/time.h>
 
 #define	SIZE_ARRAY	2
 
@@ -34,6 +36,37 @@ void insertionSort(T& container) {
 	}
 }
 
+template<typename T>
+void	merge(T& container, T& left, T& right) {
+	typename T::iterator	itLeft = left.begin();
+	typename T::iterator	itRight = right.begin();
+
+	while (itLeft != left.end() && itRight != right.end())
+		*itLeft > *itRight ? container.push_back(*itRight++) : container.push_back(*itLeft++);
+	while (itLeft != left.end())
+		container.push_back(*itLeft++);
+	while (itRight != right.end())
+		container.push_back(*itRight++);
+}
+
+template<typename T>
+void	mergeSortHanling(T& container) {
+	if (container.size() <= SIZE_ARRAY) {
+		insertionSort(container);
+		return;
+	}
+	T						left, right;
+	typename T::iterator	middle = container.begin();
+	
+	std::advance(middle, container.size() / 2);
+	left.assign(container.begin(), middle);
+	right.assign(middle, container.end());
+	mergeSortHanling(left);
+	mergeSortHanling(right);
+	container.clear();
+	merge(container, left, right);
+}
+
 class PmergeMe {
 	private:
 		class InvalidStringStreamException : public std::exception {
@@ -45,11 +78,10 @@ class PmergeMe {
 
 		std::list<int>		_cList;
 		std::vector<int>	_cVec;
+		double				timeList, timeVector;
+
 		PmergeMe(const PmergeMe& src);
 		PmergeMe&	operator=(const PmergeMe& dest);
-
-		void	mergeSortHanling(std::list<int>& list);
-		void	merge(std::list<int>& list, std::list<int>& left, std::list<int>& right);
 
 	public:
 		class InvalidArgException : public std::exception {
@@ -62,6 +94,12 @@ class PmergeMe {
 			public:
 				const char* what(void) const throw() {
 					return "Error: invalid input => ";
+				}
+		};
+		class DoubleException : public std::exception {
+			public:
+				const char* what(void) const throw() {
+					return "Error: each element are not unique.";
 				}
 		};
 
