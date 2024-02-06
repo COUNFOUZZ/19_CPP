@@ -42,61 +42,40 @@ void	PmergeMe::parseInput(std::string str) {
 	}
 }
 
-// void	PmergeMe::sortList(void) {
-// 	std::list<int>::iterator it, second;
-
-// 	for (it = this->_cList.begin(); it != this->_cList.end(); ++it) {
-// 		int key = *it;
-// 		second = it;
-// 		while (second != this->_cList.begin() && key < *(--second)) {
-// 			std::iter_swap(it, second);
-// 			--it;
-// 		}
-// 	}
-// }
-
-// void	PmergeMe::sortVector(void) {
-// 	std::vector<int>::iterator it, second;
-
-// 	for (it = this->_cVec.begin(); it != this->_cVec.end(); ++it) {
-// 		int key = *it;
-// 		second = it;
-// 		while (second != this->_cVec.begin() && key < *(--second)) {
-// 			std::iter_swap(it, second);
-// 			--it;
-// 		}
-// 	}
-// }
-
-// void	PmergeMe::insertionSort(int listOrVector) {
-// 	if (this->_cList.size() < 2)
-// 		return;
-// 	if (!listOrVector)
-// 		sortList();
-// 	else if (listOrVector == 1)
-// 		sortVector();
-// 	else
-// 		return;
-// }
-
-
+void	PmergeMe::merge(std::list<int>& list, std::list<int>& left, std::list<int>& right) {
+	std::list<int>::iterator	itLeft = left.begin();
+	std::list<int>::iterator	itRight = right.begin();
+	
+	printContainer(left);
+	printContainer(right);
+	while (itLeft != left.end() && itRight != right.end())
+		*itLeft > *itRight ? list.push_back(*itRight++) : list.push_back(*itLeft++);
+	while (itLeft != left.end())
+		list.push_back(*itLeft++);
+	while (itRight != right.end())
+		list.push_back(*itRight++);
+}
 
 void	PmergeMe::mergeSortHanling(std::list<int>& list) {
-	if (list.size() < 2)
+	if (list.size() <= SIZE_ARRAY) {
+		insertionSort(list);
 		return;
+	}
 	std::list<int>				left, right;
-	std::list<int>::iterator	middle;
+	std::list<int>::iterator	middle = list.begin();
 	
 	std::advance(middle, list.size() / 2);
 	left.assign(list.begin(), middle);
 	right.assign(middle, list.end());
-
-
+	mergeSortHanling(left);
+	mergeSortHanling(right);
 	list.clear();
+	merge(list, left, right);
 }
 
-void	PmergeMe::mergeSort(void) {
+void	PmergeMe::sort(void) {
 	mergeSortHanling(this->_cList);
+	printContainer(this->_cList);
 }
 
 //	Getters

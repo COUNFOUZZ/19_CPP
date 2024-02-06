@@ -9,6 +9,8 @@
 #include <sstream>
 #include <iterator>
 
+#define	SIZE_ARRAY	2
+
 template<typename T>
 void	printContainer(const T& container) {
 	typename T::const_iterator	it;
@@ -20,8 +22,6 @@ void	printContainer(const T& container) {
 
 template<typename T>
 void insertionSort(T& container) {
-	if (container.size() < 2)
-		return;
 	typename T::iterator it, second;
 
 	for (it = container.begin(); it != container.end(); ++it) {
@@ -49,8 +49,7 @@ class PmergeMe {
 		PmergeMe&	operator=(const PmergeMe& dest);
 
 		void	mergeSortHanling(std::list<int>& list);
-		// void	sortList(void);
-		// void	sortVector(void);
+		void	merge(std::list<int>& list, std::list<int>& left, std::list<int>& right);
 
 	public:
 		class InvalidArgException : public std::exception {
@@ -69,10 +68,9 @@ class PmergeMe {
 		PmergeMe(void);
 		~PmergeMe(void);
 
-		void					parseInput(std::string str);
-		// void					insertionSort(int listOrVector);
-		void					mergeSort(void);
-		std::list<int>&	getList(void);
+		void				parseInput(std::string str);
+		void				sort(void);
+		std::list<int>&		getList(void);
 		std::vector<int>&	getVector(void);
 };
 
