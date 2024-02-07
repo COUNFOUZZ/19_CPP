@@ -40,10 +40,10 @@ class Span {
 
 		Span&	operator=(const Span& dest);
 
-		void			addNumber(int nbr);
-		void			rangeOfIterator(unsigned int size, int value);
-		unsigned int	shortestSpan(void) const;
-		unsigned int	longestSpan(void) const;
+		void	addNumber(int nbr);
+		void	rangeOfIterator(unsigned int size, int value);
+		int		shortestSpan(void) const;
+		int		longestSpan(void) const;
 };
 
 #endif

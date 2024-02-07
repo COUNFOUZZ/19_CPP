@@ -21,8 +21,8 @@ void	Span::addNumber(int nbr) {
 	this->_container.push_back(nbr);
 }
 
-unsigned int	Span::shortestSpan(void) const {
-	if (this->_sizeMax < 2)
+int	Span::shortestSpan(void) const {
+	if (this->_container.size() < 2)
 		throw NoSpanFoundException();
 
 	std::vector<int>	cp_vector(this->_container);
@@ -35,8 +35,8 @@ unsigned int	Span::shortestSpan(void) const {
 	return min;
 }
 
-unsigned int	Span::longestSpan(void) const {
-	if (this->_sizeMax < 2)
+int	Span::longestSpan(void) const {
+	if (this->_container.size() < 2)
 		throw NoSpanFoundException();
 
 	std::vector<int>::const_iterator	max, min;
