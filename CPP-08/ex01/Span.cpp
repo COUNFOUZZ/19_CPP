@@ -25,11 +25,11 @@ unsigned int	Span::shortestSpan(void) const {
 	if (this->_sizeMax < 2)
 		throw NoSpanFoundException();
 
-	std::vector<unsigned int>	cp_vector(this->_container);
+	std::vector<int>	cp_vector(this->_container);
 	std::sort(cp_vector.begin(), cp_vector.end());
-	unsigned int	min = UINT_MAX;
+	int	min = INT_MAX;
 	for (size_t i = 1; i < cp_vector.size(); ++i) {
-		unsigned int	currentDiff = cp_vector[i] - cp_vector[i - 1];
+		int	currentDiff = cp_vector[i] - cp_vector[i - 1];
 		min = std::min(min, currentDiff);
 	}
 	return min;
@@ -39,7 +39,7 @@ unsigned int	Span::longestSpan(void) const {
 	if (this->_sizeMax < 2)
 		throw NoSpanFoundException();
 
-	std::vector<unsigned int>::const_iterator	max, min;
+	std::vector<int>::const_iterator	max, min;
 
 	max = std::max_element(this->_container.begin(), this->_container.end());
 	min = std::min_element(this->_container.begin(), this->_container.end());

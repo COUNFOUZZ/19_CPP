@@ -9,8 +9,9 @@
 
 class Span {
 	private:
-		std::vector<unsigned int>	_container;
-		unsigned int				_sizeMax;
+		std::vector<int>	_container;
+		unsigned int		_sizeMax;
+
 		class ContainerFullException : public std::exception {
 			public:
 				const char*	what(void)	const throw() {
@@ -29,6 +30,7 @@ class Span {
 					return "Exception error: no span can be found !";
 				}
 		};
+
 		Span(void);
 
 	public:
